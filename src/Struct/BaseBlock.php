@@ -23,6 +23,8 @@ class BaseBlock implements BlockInterface
         $this->data = $data;
         $date = new DateTime();
         $this->timestamp = $date->getTimestamp();
+
+        $this->generateHash();
     }
 
     public function __get($name)

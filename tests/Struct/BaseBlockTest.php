@@ -14,4 +14,11 @@ class BaseBlockTest extends TestCase
         $this->assertEquals('', $block->previousHash);
         $this->assertEquals('First Block', $block->data);
     }
+
+    public function test_generate_second_block(): void
+    {
+        $block1 = new BaseBlock();
+        $block2 = new BaseBlock(1, $block1->hash, 'Second Block');
+        $this->assertEquals($block1->hash, $block2->previousHash);
+    }
 }
