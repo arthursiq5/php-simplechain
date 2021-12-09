@@ -25,5 +25,4 @@ class BlockchainTest extends TestCase
         $this->assertEquals($this->blockchain->last()->hash, $newBlock->hash);
         $this->assertEquals($this->blockchain->last()->index, $newBlock->index);
     }
-    
 }

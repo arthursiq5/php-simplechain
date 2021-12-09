@@ -11,7 +11,7 @@ use DateTimeImmutable;
  * @property string $data
  * @property int $timestamp
  */
-class BaseBlock implements BlockInterface
+class BaseBlock implements BlockInterface, AuditableBlockInterface
 {
     public const HASH_ALGORITHM = 'sha256';
 
@@ -59,7 +59,11 @@ class BaseBlock implements BlockInterface
         return hash(self::HASH_ALGORITHM, $this->getHashData());
     }
 
-    public function isNextValid(BlockInterface $block): bool
+    /**
+     * @param self $block
+     * @return boolean
+     */
+    public function isNextValid(AuditableBlockInterface $block): bool
     {
         if ($block->index !==  $this->index + 1) {
             return false;
