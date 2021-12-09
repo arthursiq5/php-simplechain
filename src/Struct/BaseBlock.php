@@ -6,6 +6,8 @@ use DateTime;
 
 class BaseBlock implements BlockInterface
 {
+    public const HASH_ALGORITHM = 'sha256';
+
     private int $index;
     private string $previousHash;
     private string $hash;
@@ -43,6 +45,6 @@ class BaseBlock implements BlockInterface
 
     public function generateHash(): void
     {
-        $this->hash = hash('sha256', $this->getHashData());
+        $this->hash = hash(self::HASH_ALGORITHM, $this->getHashData());
     }
 }
