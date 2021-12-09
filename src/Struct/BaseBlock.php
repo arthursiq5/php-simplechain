@@ -53,4 +53,13 @@ class BaseBlock implements BlockInterface
     {
         $this->hash = hash(self::HASH_ALGORITHM, $this->getHashData());
     }
+
+    public function isNextValid(BlockInterface $block): bool
+    {
+        if ($block->index !==  $this->index + 1) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -21,4 +21,11 @@ class BaseBlockTest extends TestCase
         $block2 = new BaseBlock(1, $block1->hash, 'Second Block');
         $this->assertEquals($block1->hash, $block2->previousHash);
     }
+
+    public function test_next_valid(): void
+    {
+        $block1 = new BaseBlock();
+        $block2 = new BaseBlock(1, $block1->hash, 'Second Block');
+        $this->assertTrue($block1->isNextValid($block2));
+    }
 }
