@@ -2,8 +2,15 @@
 
 namespace Arthursiq5\PhpSimplechain\Struct;
 
-use DateTime;
+use DateTimeImmutable;
 
+/**
+ * @property int $index
+ * @property string $previousHash
+ * @property string $hash
+ * @property string $data
+ * @property int $timestamp
+ */
 class BaseBlock implements BlockInterface
 {
     public const HASH_ALGORITHM = 'sha256';
@@ -11,8 +18,8 @@ class BaseBlock implements BlockInterface
     private int $index;
     private string $previousHash;
     private string $hash;
-    private $data;
-    private int $timestamp;
+    private string $data;
+    private DateTimeImmutable $createdAt;
 
     public function __construct(
         int $index = 0,
@@ -23,8 +30,7 @@ class BaseBlock implements BlockInterface
         $this->index = $index;
         $this->previousHash = $previousHash;
         $this->data = $data;
-        $date = new DateTime();
-        $this->timestamp = $date->getTimestamp();
+        $this->createdAt = new DateTimeImmutable();
 
         $this->generateHash();
     }
@@ -40,7 +46,7 @@ class BaseBlock implements BlockInterface
             . $this->index
             . $this->previousHash
             . json_encode($this->data)
-            . $this->timestamp;
+            . $this->createdAt->getTimestamp();
     }
 
     public function generateHash(): void
