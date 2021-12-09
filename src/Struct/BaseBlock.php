@@ -51,7 +51,12 @@ class BaseBlock implements BlockInterface
 
     public function generateHash(): void
     {
-        $this->hash = hash(self::HASH_ALGORITHM, $this->getHashData());
+        $this->hash = $this->calculateHash();
+    }
+
+    public function calculateHash(): string
+    {
+        return hash(self::HASH_ALGORITHM, $this->getHashData());
     }
 
     public function isNextValid(BlockInterface $block): bool
