@@ -65,6 +65,14 @@ class BaseBlock implements BlockInterface
             return false;
         }
 
+        if ($block->previousHash !== $this->hash) {
+            return false;
+        }
+
+        if ($block->hash !== $block->calculateHash()) {
+            return false;
+        }
+
         return true;
     }
 }

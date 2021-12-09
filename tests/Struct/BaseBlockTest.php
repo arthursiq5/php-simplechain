@@ -26,6 +26,11 @@ class BaseBlockTest extends TestCase
     {
         $block1 = new BaseBlock();
         $block2 = new BaseBlock(1, $block1->hash, 'Second Block');
+        $block3 = new BaseBlock(2, $block2->hash, 'Third Block');
+        
+        // testing default operations
         $this->assertTrue($block1->isNextValid($block2));
+        $this->assertTrue($block2->isNextValid($block3));
+        $this->assertFalse($block1->isNextValid($block3));
     }
 }
