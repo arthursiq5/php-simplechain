@@ -79,4 +79,25 @@ class BaseBlock implements BlockInterface, AuditableBlockInterface
 
         return true;
     }
+
+    /**
+     * @param self $block
+     * @return boolean
+     */
+    public function isBeforeValid(AuditableBlockInterface $block): bool
+    {
+        if ($block->index !== $this->index - 1) {
+            return false;
+        }
+
+        if ($block->hash !== $this->previousHash) {
+            return false;
+        }
+
+        if ($block->hash !==  $block->calculateHash()) {
+            return false;
+        }
+
+        return true;
+    }
 }

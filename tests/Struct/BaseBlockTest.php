@@ -33,4 +33,16 @@ class BaseBlockTest extends TestCase
         $this->assertTrue($block2->isNextValid($block3));
         $this->assertFalse($block1->isNextValid($block3));
     }
+
+    public function test_before_valid(): void
+    {
+        $block1 = new BaseBlock();
+        $block2 = new BaseBlock(1, $block1->hash, 'Second Block');
+        $block3 = new BaseBlock(2, $block2->hash, 'Third Block');
+        
+        // testing default operations
+        $this->assertTrue($block2->isBeforeValid($block1));
+        $this->assertTrue($block3->isBeforeValid($block2));
+        $this->assertFalse($block3->isBeforeValid($block1));
+    }
 }
